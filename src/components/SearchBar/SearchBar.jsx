@@ -29,7 +29,6 @@ export class SearchBar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos..."
-            pattern="^[a-zA-Z ]*$"
             name="query"
             onChange={this.onChange}
             value={this.state.query}

@@ -26,8 +26,13 @@
 
 import styled from 'styled-components';
 
+export const ButtonWrapper = styled.div`
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+`;
+
 export const ButtonEl = styled.button`
-  margin: 30px;
   padding: 10px 15px;
   text-align: center;
   font-size: 18px;
