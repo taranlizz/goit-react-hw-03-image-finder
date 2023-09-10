@@ -67,6 +67,7 @@ export class App extends Component {
   render() {
     const { items, isLoading, totalItems, page } = this.state;
     const isNeedToShow = totalItems / PER_PAGE > page;
+
     return (
       <>
         <Toaster position="top-right" reverseOrder={false} />
@@ -74,7 +75,7 @@ export class App extends Component {
         {isLoading && <Loader />}
         {items.length > 0 && <ImageGallery items={items} />}
         {items.length > 0 && isNeedToShow && (
-          <Button onClick={this.onLoadMoreClick}>Load more</Button>
+          <Button onClick={this.onLoadMoreClick} loading={isLoading} />
         )}
       </>
     );

@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { List } from './ImageGallery.styled';
 
 export const ImageGallery = ({ items }) => {
   return (
     <List>
-      {items.map(({ id, webformatURL, largeImageURL, tags }) => (
+      {items.map(({ webformatURL, largeImageURL, tags }, idx) => (
         <ImageGalleryItem
-          key={id}
+          key={idx}
           webformatURL={webformatURL}
           largeImageURL={largeImageURL}
           tags={tags}
@@ -14,4 +15,8 @@ export const ImageGallery = ({ items }) => {
       ))}
     </List>
   );
+};
+
+ImageGallery.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object),
 };
