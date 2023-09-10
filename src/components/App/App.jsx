@@ -26,7 +26,9 @@ export class App extends Component {
         this.setState({
           isLoading: true,
         });
+
         const items = await getGalleryItems(query, page);
+
         if (this.state.page === prevState.page) {
           notificationAPI.success(items.totalHits);
           notificationAPI.info(items.totalHits);
@@ -37,6 +39,7 @@ export class App extends Component {
           });
           return;
         }
+
         notificationAPI.info(items.totalHits, page);
         this.setState(state => ({
           items: [...state.items, ...items.hits],
@@ -66,7 +69,7 @@ export class App extends Component {
     const isNeedToShow = totalItems / PER_PAGE > page;
     return (
       <>
-        <Toaster />
+        <Toaster position="top-right" reverseOrder={false} />
         <SearchBar onSubmit={this.onSearchSubmit} />
         {isLoading && <Loader />}
         {items.length > 0 && <ImageGallery items={items} />}
