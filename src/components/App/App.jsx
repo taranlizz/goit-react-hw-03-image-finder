@@ -11,9 +11,9 @@ export class App extends Component {
   state = {
     query: '',
     items: [],
-    totalItems: 0,
     page: 1,
     isLoading: false,
+    showLoadMore: false,
   };
 
   componentDidUpdate = async (_, prevState) => {
@@ -28,15 +28,15 @@ export class App extends Component {
           isLoading: true,
         });
 
-        const items = await getGalleryItems(query, page);
+        const { hits, totalHits } = await getGalleryItems(query, page);
 
         this.setState(state => ({
-          items: [...state.items, ...items.hits],
-          totalItems: items.totalHits,
+          items: [...state.items, ...hits],
+          showLoadMore: this.state.page < Math.ceil(totalHits / 12),
         }));
 
-        notificationAPI.success(items.totalHits, page);
-        notificationAPI.info(items.totalHits, page);
+        notificationAPI.success(totalHits, page);
+        notificationAPI.info(totalHits, page);
       } catch (error) {
         notificationAPI.error();
       } finally {
@@ -62,8 +62,7 @@ export class App extends Component {
   };
 
   render() {
-    const { items, isLoading, totalItems, page } = this.state;
-    const isNeedToShow = totalItems / PER_PAGE > page;
+    const { items, isLoading, showLoadMore } = this.state;
 
     return (
       <>
@@ -71,7 +70,7 @@ export class App extends Component {
         <SearchBar onSubmit={this.onSearchSubmit} />
         {isLoading && <Loader />}
         {items.length > 0 && <ImageGallery items={items} />}
-        {items.length > 0 && isNeedToShow && (
+        {showLoadMore && (
           <Button onClick={this.onLoadMoreClick} loading={isLoading} />
         )}
       </>
