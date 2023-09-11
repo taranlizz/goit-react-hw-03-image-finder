@@ -16,12 +16,19 @@ export class App extends Component {
     isLoading: false,
   };
 
+  componentDidMount() {
+    this.setState({
+      page: 1,
+    });
+  }
+
   componentDidUpdate = async (_, prevState) => {
     if (
       this.state.query !== prevState.query ||
       this.state.page !== prevState.page
     ) {
       const { query, page } = this.state;
+
       try {
         this.setState({
           isLoading: true,
@@ -29,21 +36,13 @@ export class App extends Component {
 
         const items = await getGalleryItems(query, page);
 
-        if (this.state.page === prevState.page) {
-          notificationAPI.success(items.totalHits);
-          notificationAPI.info(items.totalHits);
-          this.setState({
-            items: items.hits,
-            totalItems: items.totalHits,
-            page: 1,
-          });
-          return;
-        }
-
-        notificationAPI.info(items.totalHits, page);
         this.setState(state => ({
           items: [...state.items, ...items.hits],
+          totalItems: items.totalHits,
         }));
+
+        notificationAPI.success(items.totalHits, page);
+        notificationAPI.info(items.totalHits, page);
       } catch (error) {
         notificationAPI.error();
       } finally {
@@ -55,7 +54,11 @@ export class App extends Component {
   };
 
   onSearchSubmit = value => {
-    this.setState({ query: `${Date.now()}/${value}` });
+    this.setState({
+      query: `${Date.now()}/${value}`,
+      items: [],
+      page: 1,
+    });
   };
 
   onLoadMoreClick = () => {

@@ -1,8 +1,10 @@
 import toast from 'react-hot-toast';
 import { PER_PAGE } from 'galleryApi';
 
-export const success = totalHits => {
-  toast.success(`We found ${totalHits} images.`);
+export const success = (totalHits, page) => {
+  if (page === 1) {
+    toast.success(`We found ${totalHits} images.`);
+  }
 };
 
 export const error = () => {
