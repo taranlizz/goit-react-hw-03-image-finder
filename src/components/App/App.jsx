@@ -16,12 +16,6 @@ export class App extends Component {
     isLoading: false,
   };
 
-  componentDidMount() {
-    this.setState({
-      page: 1,
-    });
-  }
-
   componentDidUpdate = async (_, prevState) => {
     if (
       this.state.query !== prevState.query ||
