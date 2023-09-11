@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const API_KEY = '38537046-1dad650a5645b155ff397a43e';
-export const PER_PAGE = 12;
 
 const params = new URLSearchParams({
   key: API_KEY,

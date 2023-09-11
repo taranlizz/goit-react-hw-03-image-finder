@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { Button } from '../Button/Button';
-import { getGalleryItems, PER_PAGE } from 'galleryApi';
+import { getGalleryItems } from 'galleryApi';
 import { Loader } from 'components/Loader/Loader';
 import * as notificationAPI from 'galleryNotificationApi';
 

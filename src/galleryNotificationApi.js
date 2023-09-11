@@ -1,5 +1,4 @@
 import toast from 'react-hot-toast';
-import { PER_PAGE } from 'galleryApi';
 
 export const success = (totalHits, page) => {
   if (page === 1) {
@@ -12,7 +11,7 @@ export const error = () => {
 };
 
 export const info = (totalHits, page) => {
-  const totalPages = totalHits / PER_PAGE;
+  const totalPages = totalHits / 12;
   let message = null;
   if (totalPages <= 1 || page > totalPages) {
     message = "We're sorry, but you've reached the end of search results.";
