@@ -6,7 +6,7 @@ const params = new URLSearchParams({
   key: API_KEY,
   image_type: 'photo',
   orientation: 'horizontal',
-  per_page: PER_PAGE,
+  per_page: 12,
 });
 
 export const getGalleryItems = async (query, page) => {
